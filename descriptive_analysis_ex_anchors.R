@@ -2,6 +2,7 @@ setwd('/Users/mikkel/Desktop/netMHCpan-4.1/pep2score')
 
 library('Hmisc')
 
+# Import csv files containing the BLOSUM-scores from the 6 comparisons with SARS-CoV-2, where anchor points were excluded
 data.SARS_HKU1_ex <- read.csv('blosum-SARS-Cov-2-HCov-HKU1-ex-anchors/blosum_SARS-Cov-2_HCov-HKU1_combined_ex_anchors.csv', header=TRUE, sep=",", as.is=TRUE)
 data.SARS_229E_ex <- read.csv('blosum-SARS-Cov-2-HCov-229E-ex-anchors/blosum_SARS-Cov-2_HCov-229E_combined_ex_anchors.csv', header=TRUE, sep=",", as.is=TRUE)
 data.SARS_NL63_ex <- read.csv('blosum-SARS-Cov-2-HCov-NL63-ex-anchors/blosum_SARS-Cov-2_HCov-NL63_combined_ex_anchors.csv', header=TRUE, sep=",", as.is=TRUE)
@@ -9,8 +10,7 @@ data.SARS_OC43_ex <- read.csv('blosum-SARS-Cov-2-HCov-OC43-ex-anchors/blosum_SAR
 data.SARS_EBOV_ex <- read.csv('blosum-SARS-Cov-2-Zaire-ebolavirus-ex-anchors/blosum_SARS-Cov-2_Zaire-ebolavirus_combined_ex_anchors.csv', header=TRUE, sep=",", as.is=TRUE)
 data.SARS_H3N2_ex <- read.csv('blosum-SARS-Cov-2-Influenza-virus-A-H3N2-ex-anchors/blosum_SARS-Cov-2_Influenza-virus-A-H3N2_combined_ex_anchors.csv', header=TRUE, sep=",", as.is=TRUE)
 
-# Histograms
-
+# Histograms of the BLOSUM-score from the 6 comparisons
 par(mfrow = c(2,2))
 hist(data.SARS_HKU1_ex$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/HCov-HKU1 comparison \n - excluding anchors', col = 'coral3', breaks = 250)
 hist(data.SARS_229E_ex$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/HCov-229E comparison\n - excluding anchors', col = 'chartreuse3', breaks = 250)
@@ -19,7 +19,8 @@ hist(data.SARS_OC43_ex$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of
 hist(data.SARS_EBOV_ex$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/EBOV comparison\n - excluding anchors', col = 'black', breaks = 250, add = TRUE)
 hist(data.SARS_H3N2_ex$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/H3N2 comparison\n - excluding anchors', col = 'white', breaks = 250, add = TRUE)
 
-# Boxplots
+
+# Boxplot of the BLOSUM-score from the 6 comparisons
 
 par(mfrow = c(1,1))
 boxplot(data.SARS_HKU1_ex$BLOSUM.score, data.SARS_229E_ex$BLOSUM.score, data.SARS_NL63_ex$BLOSUM.score, data.SARS_OC43_ex$BLOSUM.score, data.SARS_EBOV_ex$BLOSUM.score, data.SARS_H3N2_ex$BLOSUM.score, 
@@ -27,8 +28,7 @@ boxplot(data.SARS_HKU1_ex$BLOSUM.score, data.SARS_229E_ex$BLOSUM.score, data.SAR
         xlab="BLOSUM SARS-Cov-2 comparison with", ylab="BLOSUM score", range = 0)
 
 
-# Reversed cumulative distribution
-
+# Reversed cumulative distribution - one graph for each comparison with controls
 xat <- seq(0, 1, by = 0.2)
 xlabels <- seq(1, 0, by=-0.2)
 
@@ -58,7 +58,7 @@ axis(1, at=xat, labels=xlabels)
 legend("topleft", legend=c("HCov-OC43", "Zaire-EBOV", "Influenza-A-H3N2"), col=c("darkorchid3","black", "grey"), lty = 1, cex = 0.75, text.width = 0.1)
 
 
-# Combined reversed cumulative distribution 
+# Combined graph of reverse cumulative distribution curve
 
 xat <- seq(0, 1, by = 0.2)
 xlabels <- seq(1, 0, by=-0.2)
