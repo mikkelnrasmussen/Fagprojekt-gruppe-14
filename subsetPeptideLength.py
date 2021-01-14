@@ -26,7 +26,7 @@ def subsetPeptideLength(virus, virus_name):
         # Selecting the unique HLA-ligands for each HLA allele
         temp_virus_hla = virus.loc[virus['HLA'] == i]['Icore'].unique()
         
-        # Vectorization theVectorization "len" function
+        # Vectorization of the "len" function
         peptide_len = np.vectorize(len)
         
         # Subdivide the HLA-ligands by length (8-11)
