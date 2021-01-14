@@ -9,7 +9,8 @@ Created on Tue Nov 24 16:22:32 2020
 import pandas as pd
 from blosumOverlap import blosumOverlap
 
-# Import of csv files containing predicted epitopes for the five viruses; SARS-Cov-2, HCov-229E, HCov-HKU1, HCov-NL63 and HCov-OC43.
+# Import of csv files containing predicted HLA-ligands for the five viruses and two controls; SARS-Cov-2, HCov-229E, HCov-HKU1, HCov-NL63 and HCov-OC43
+# Zaire-EBOV and Influenza-A H3N2.
 df_SARS = pd.read_csv('SARS-Cov-2/SARS-Cov-2_combined.csv')
 df_HKU1 = pd.read_csv('Human-coronavirus-HKU1/Human-coronavirus-HKU1_combined.csv')
 df_229E = pd.read_csv('Human-coronavirus-229E/Human-coronavirus-229E_combined.csv')
@@ -18,7 +19,7 @@ df_OC43 = pd.read_csv('Human-coronavirus-OC43/Human-coronavirus-OC43_combined.cs
 df_EBOV = pd.read_csv('Zaire-ebolavirus/Zaire-ebolavirus_combined.csv')
 df_H3N2 = pd.read_csv('Influenza-virus-A-H3N2/Influenza-virus-A-H3N2_combined.csv')
 
-# Restrict data to only HLA-ligands (strong binders (SB)) - (EL_rank < 0.5) 
+# Restrict data to only HLA-ligands (strong binders (SB)) with EL_rank < 0.5
 df_SARS_SB = df_SARS.loc[df_SARS['EL_rank'] < 0.5]
 df_HKU1_SB = df_HKU1.loc[df_HKU1['EL_rank'] < 0.5]
 df_229E_SB = df_229E.loc[df_229E['EL_rank'] < 0.5]
@@ -27,8 +28,7 @@ df_OC43_SB = df_OC43.loc[df_OC43['EL_rank'] < 0.5]
 df_EBOV_SB = df_EBOV.loc[df_EBOV['EL_rank'] < 0.5]
 df_H3N2_SB = df_H3N2.loc[df_H3N2['EL_rank'] < 0.5] 
 
-# Calculate the number and proportional overlap of similar HLA-ligands 
-# above a certain threshold BLOSUM-score (here 0.8) between two viruses.
+# Import csv files containing the BLOSUM-scores from the 6 comparisons with SARS-CoV-2
 df_HKU1_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-HCov-HKU1/blosum_SARS-Cov-2_HCov-HKU1_combined.csv')
 df_229E_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-HCov-229E/blosum_SARS-Cov-2_HCov-229E_combined.csv')
 df_NL63_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-HCov-NL63/blosum_SARS-Cov-2_HCov-NL63_combined.csv')
@@ -36,7 +36,8 @@ df_OC43_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-HCov-OC43/blosum_SARS-
 df_EBOV_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-Zaire-ebolavirus/blosum_SARS-Cov-2_Zaire-ebolavirus_combined.csv')
 df_H3N2_blosum = pd.read_csv('pep2score/blosum-SARS-Cov-2-Influenza-virus-A-H3N2/blosum_SARS-Cov-2_Influenza-virus-A-H3N2_combined.csv')
 
-# Rank by proportional overlap
+# Calculate the number and proportional overlap of similar HLA-ligands 
+# above a certain threshold BLOSUM-score (here 0.8) between two viruses.
 df_SARS_HKU1 = blosumOverlap(df_HKU1_blosum, df_SARS_SB, df_HKU1_SB, 'SARS-Cov-2', 'HCov-HKU1')
 df_SARS_229E = blosumOverlap(df_229E_blosum, df_SARS_SB, df_229E_SB, 'SARS-Cov-2', 'HCov-229E')
 df_SARS_NL63 = blosumOverlap(df_NL63_blosum, df_SARS_SB, df_NL63_SB, 'SARS-Cov-2', 'HCov-NL63')
