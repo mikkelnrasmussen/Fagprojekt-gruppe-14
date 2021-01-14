@@ -11,8 +11,8 @@ import pandas as pd
 
 def HLA_freq():
     
-    # Read HLA frequencies txt files from allelefrequencies.net
-    with open('HLA_B_freq.txt') as f:
+    # Read HLA-A, -B or -C frequencies txt files obtained from allelefrequencies.net - 
+    with open('HLA_A_freq.txt') as f:
         hla_text = f.readlines()
     
     lines = [line.rstrip().split() for line in hla_text]
@@ -67,10 +67,9 @@ def HLA_freq():
    
     return hla_freq_sum
 
-
+# Sort the HLA alleles and print the most freqeunt
 k = Counter(HLA_freq())
 highest = k.most_common(30) 
-
 print("Allele: Frequency")
 num = 1 
 for i in highest: 
