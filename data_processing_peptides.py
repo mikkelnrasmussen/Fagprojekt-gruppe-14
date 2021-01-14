@@ -30,7 +30,7 @@ df_HKU1_SB = df_HKU1.loc[df_HKU1['EL_rank'] < 0.5]
 df_NL63_SB = df_NL63.loc[df_NL63['EL_rank'] < 0.5]
 df_OC43_SB = df_OC43.loc[df_OC43['EL_rank'] < 0.5]
 
-# Calculate the actual overlap, proportional overlap and the number SB 
+# Calculate the actual overlap, proportional overlap and the number HLA-ligands 
 # in the two compared viruses for a given HLA
 df_SARS_EBOV = overlap_rank(df_SARS_SB, df_EBOV_SB, 'SARS-Cov-2', 'Zaire Ebolavirus')
 df_SARS_H3N2 = overlap_rank(df_SARS_SB, df_H3N2_SB, 'SARS-Cov-2', 'Influenza virus A H3N2')
