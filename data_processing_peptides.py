@@ -21,7 +21,7 @@ df_OC43 = pd.read_csv('Human-coronavirus-OC43/Human-coronavirus-OC43_combined.cs
 df_EBOV = pd.read_csv('Zaire-ebolavirus/Zaire-ebolavirus_combined.csv')
 df_H3N2 = pd.read_csv('Influenza-virus-A-H3N2/Influenza-virus-A-H3N2_combined.csv')
 
-# Restrict data to only strong binders (SB) - (EL_rank < 0.5) 
+# Restrict data to only HLA-ligands (strong binders (SB)) - (EL_rank < 0.5) 
 df_SARS_SB = df_SARS.loc[df_SARS['EL_rank'] < 0.5]
 df_EBOV_SB = df_EBOV.loc[df_EBOV['EL_rank'] < 0.5]
 df_H3N2_SB = df_H3N2.loc[df_H3N2['EL_rank'] < 0.5] 
