@@ -6,6 +6,8 @@ Created on Mon Sep 28 22:20:33 2020
 @author: mikkel
 """
 
+# Example of script combining all of the excel files outputted from NetMHCpan-4.1.
+
 import os
 import pandas as pd
 cwd = os.path.abspath('') 
