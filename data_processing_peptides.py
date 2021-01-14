@@ -12,7 +12,7 @@ from matplotlib import pyplot as plt
 from overlap_rank_function import overlap_rank
 
 
-# Import of csv files containing predicted epitopes for the five viruses; SARS-Cov-2, HCov-229E, HCov-HKU1, HCov-NL63 and HCov-OC43.
+# Import of csv files containing predicted HLA-ligand from NetMHCpan for the five viruses; SARS-Cov-2, HCov-229E, HCov-HKU1, HCov-NL63 and HCov-OC43.
 df_SARS = pd.read_csv('SARS-Cov-2/SARS-Cov-2_combined.csv')
 df_229E = pd.read_csv('Human-coronavirus-229E/Human-coronavirus-229E_combined.csv')
 df_HKU1 = pd.read_csv('Human-coronavirus-HKU1/Human-coronavirus-HKU1_combined.csv')
@@ -21,7 +21,7 @@ df_OC43 = pd.read_csv('Human-coronavirus-OC43/Human-coronavirus-OC43_combined.cs
 df_EBOV = pd.read_csv('Zaire-ebolavirus/Zaire-ebolavirus_combined.csv')
 df_H3N2 = pd.read_csv('Influenza-virus-A-H3N2/Influenza-virus-A-H3N2_combined.csv')
 
-# Restrict data to only HLA-ligands (strong binders (SB)) - (EL_rank < 0.5) 
+# Restrict data to only HLA-ligands (strong binders (SB)) EL_rank < 0.5
 df_SARS_SB = df_SARS.loc[df_SARS['EL_rank'] < 0.5]
 df_EBOV_SB = df_EBOV.loc[df_EBOV['EL_rank'] < 0.5]
 df_H3N2_SB = df_H3N2.loc[df_H3N2['EL_rank'] < 0.5] 
