@@ -13,7 +13,7 @@ import numpy as np
 
 def overlap_excluding(virus1, virus2, virus1_name, virus2_name):
     
-    
+    # List with all the 38 HLA alleles
     hla_list = ['HLA-A02:01', 'HLA-A01:01', 'HLA-A03:01', 'HLA-A24:02', 'HLA-A11:01', 'HLA-A26:01', 
                 'HLA-A32:01', 'HLA-A68:01', 'HLA-A25:01', 'HLA-A31:01', 'HLA-A29:02', 'HLA-A23:01', 
                 'HLA-B07:02', 'HLA-B08:01', 'HLA-B15:01', 'HLA-B51:01', 'HLA-B44:02', 'HLA-B18:01', 
