@@ -6,6 +6,10 @@ Created on Mon Sep 28 23:09:24 2020
 @author: mikkel
 """
 
+# Example of script needed to fix the excel files obtained from NetMHCpan-4.1,
+# in order to further analyse the excel files and store the information in a 
+# csv file.
+
 # Changing the data types of all strings in the module at once
 from __future__ import unicode_literals
 # Used to save the file as excel workbook
