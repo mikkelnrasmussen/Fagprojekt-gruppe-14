@@ -1,4 +1,6 @@
-# CI for the highest proportional overlap
+# CI for the highest proportional overlap obtained from the analysis of identical HLA-ligands
+# excluding anchor points, for the four common HCoVs.
+
 p_hat_229E <- 317/27986
 (p_hat_229E + c(-1, 1) * qnorm(0.975) * sqrt((p_hat_HKU1 * (1 - p_hat_HKU1))/27986))*100
 prop.test(x = c(317, 45), n = c(27986, 5436), correct = FALSE)
