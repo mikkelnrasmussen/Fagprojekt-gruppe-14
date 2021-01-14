@@ -9,6 +9,8 @@ Created on Wed Oct 14 15:18:25 2020
 import pandas as pd
 import numpy as np
 
+# Function calculating the number an proportional overlap of identical HLA-ligands,
+# for two viruses being compared.
 
 def overlap_rank(virus1, virus2, virus1_name, virus2_name):
     
@@ -36,11 +38,12 @@ def overlap_rank(virus1, virus2, virus1_name, virus2_name):
         temp_virus1_hla = virus1.loc[virus1['HLA'] == i]['Icore'].unique()
         temp_virus2_hla = virus2.loc[virus2['HLA'] == i]['Icore'].unique()
         
-        # Calculate the number of SBs by taking the length of two list
+        # Calculating the number og HLA-ligands (SB) in the two viruses
         size_of_SB_virus1 = np.size(temp_virus1_hla)
         size_of_SB_virus2 = np.size(temp_virus2_hla)
         
-        # Calculate the actual overlap (identical icores)
+        # Calculating the number of identical overlap, as testing if each sequences in virus 1 
+        # are identical with a seqeunce in virus 2
         identical_icores = np.in1d(temp_virus1_hla, temp_virus2_hla)
         size_of_identical_icores = np.sum(identical_icores)
         
