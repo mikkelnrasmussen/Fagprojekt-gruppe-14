@@ -1,5 +1,8 @@
 setwd('/Users/mikkel/Desktop/netMHCpan-4.1')
 
+# Load data from identical HLA-ligand analysis, including and excluding, anchor points
+# and load data from 0.8 thershold blosum analysis 
+
 data.SARS_HKU1_rank <- read.csv('Overlap-of-common-colds-and-SARS-Cov-2_ranked/SARS_HKU1_rank.csv', 
                                 header=TRUE, sep=",", as.is=TRUE)
 data.SARS_229E_rank <- read.csv('Overlap-of-common-colds-and-SARS-Cov-2_ranked/SARS_229E_rank.csv', 
@@ -36,7 +39,7 @@ data.SARS_NL63_rank_blosum_ex <- read.csv('Blosum-overlap-common-colds-SARS-Cov-
 data.SARS_OC43_rank_blosum_ex <- read.csv('Blosum-overlap-common-colds-SARS-Cov-2-ex-anchors/SARS_OC43_blosum_overlap_ex_anchors.csv', 
                                        header=TRUE, sep=",", as.is=TRUE)
 
-
+# Assign "HLA" as column name
 names(data.SARS_HKU1_rank)[names(data.SARS_HKU1_rank) == "X"] <- "HLA"
 names(data.SARS_229E_rank)[names(data.SARS_229E_rank) == "X"] <- "HLA"
 names(data.SARS_NL63_rank)[names(data.SARS_NL63_rank) == "X"] <- "HLA"
@@ -89,6 +92,8 @@ hla_list <- c("HLA-B", "HLA-B", "HLA-C", "HLA-C", "HLA-C", "HLA-B", "HLA-C", "HL
               "HLA-A", "HLA-B", "HLA-C", "HLA-C", "HLA-C", "HLA-A", "HLA-A", "HLA-B", "HLA-A", "HLA-A", 
               "HLA-A", "HLA-C", "HLA-A", "HLA-A", "HLA-B", "HLA-A", "HLA-A", "HLA-A")
 
+# Perform the non-parametric boostrap with k = 100,000, replace sat to false, 
+# as the we need the same HLA allele cannot occur more than once in the ranked HLA list
 k <- 100000
 simsamples <- replicate(k, sample(hla_list, replace = FALSE))
 simmedians <- apply(simsamples, 2, rankScoreMedian)
