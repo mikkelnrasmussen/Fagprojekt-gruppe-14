@@ -2,6 +2,7 @@ setwd('/Users/mikkel/Desktop/netMHCpan-4.1/pep2score')
 
 library('Hmisc')
 
+# Import csv files containing the BLOSUM-scores from the 6 comparisons with SARS-CoV-2
 data.SARS_HKU1 <- read.csv('blosum-SARS-Cov-2-HCov-HKU1/blosum_SARS-Cov-2_HCov-HKU1_combined.csv', header=TRUE, sep=",", as.is=TRUE)
 data.SARS_229E <- read.csv('blosum-SARS-Cov-2-HCov-229E/blosum_SARS-Cov-2_HCov-229E_combined.csv', header=TRUE, sep=",", as.is=TRUE)
 data.SARS_NL63 <- read.csv('blosum-SARS-Cov-2-HCov-NL63/blosum_SARS-Cov-2_HCov-NL63_combined.csv', header=TRUE, sep=",", as.is=TRUE)
@@ -10,7 +11,7 @@ data.SARS_EBOV <- read.csv('blosum-SARS-Cov-2-Zaire-ebolavirus/blosum_SARS-Cov-2
 data.SARS_H3N2 <- read.csv('blosum-SARS-Cov-2-Influenza-virus-A-H3N2/blosum_SARS-Cov-2_Influenza-virus-A-H3N2_combined.csv', header=TRUE, sep=",", as.is=TRUE)
 
 
-# Histograms
+# Histograms of the BLOSUM-score from the 6 comparisons
 par(mfrow = c(2,2))
 hist(data.SARS_HKU1$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/HCov-HKU1 comparison', col = 'coral3', breaks = 250)
 hist(data.SARS_229E$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/HCov-229E comparison', col = 'chartreuse3', breaks = 250)
@@ -19,7 +20,7 @@ hist(data.SARS_OC43$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SA
 hist(data.SARS_EBOV$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/EBOV comparison', col = 'black', breaks = 250, add = TRUE)
 hist(data.SARS_H3N2$BLOSUM.score, xlab = 'BLOSUM score', main = 'Histogram of SARS-Cov-2/H3N2 comparison', col = 'white', breaks = 250, add = TRUE)
 
-# Boxplot
+# Boxplot of the BLOSUM-score from the 6 comparisons
 par(mfrow = c(1,1))
 boxplot(data.SARS_HKU1$BLOSUM.score, data.SARS_229E$BLOSUM.score, data.SARS_NL63$BLOSUM.score, data.SARS_OC43$BLOSUM.score, data.SARS_EBOV$BLOSUM.score, data.SARS_H3N2$BLOSUM.score, 
         main = "Boxplot of BLOSUM score", names=c("HCov-HKU1", "HCov-229E", "HCov-NL63", "HCov-OC43", "Zaire-EBOV", "Influenza-A-H3N2"), col=(c("coral3","chartreuse3", "cyan4", "darkorchid3", "black", "grey")),
@@ -27,7 +28,7 @@ boxplot(data.SARS_HKU1$BLOSUM.score, data.SARS_229E$BLOSUM.score, data.SARS_NL63
 
 
 
-# Reversed cumulative distribution
+# Reversed cumulative distribution - one graph for each comparison with controls
 xat <- seq(0, 1, by = 0.2)
 xlabels <- seq(1, 0, by=-0.2)
 
@@ -80,39 +81,7 @@ axis(1, at=xat, labels=xlabels)
 legend("topleft", legend=c("HCov-HKU1", "HCov-229E", "HCov-NL63", "HCov-OC43", "Zaire-EBOV", "Influenza-A-H3N2"), col=c("darkorchid3", "chartreuse3", "cyan4", "coral3","black", "grey"), lty = 1, cex = 0.75, text.width = 0.1)
 
 
-tbl.HKU1 <- data.frame()
-
-for (i in range){
-        x <- as.numeric(nrow(subset(data.SARS_HKU1, BLOSUM.score >= i)))
-        y <- as.numeric(nrow(subset(data.SARS_EBOV, BLOSUM.score >= i)))
-        title <- paste('BLOSUM score', i) 
-        tbl.HKU1[1, title] <- x
-        tbl.HKU1[2, title] <- y
-}
-
-row.names(tbl.HKU1) <- c('HCov-HKU1', 'Zaire-EBOV')
-tbl.HKU1
-
-tbl.HKU1.pvalue <- data.frame()
-total_HKU1 <- as.numeric(nrow(data.SARS_HKU1))
-total_EBOV <- as.numeric(nrow(data.SARS_EBOV))
-
-
-for (i in range){
-        x <- as.numeric(nrow(subset(data.SARS_HKU1, BLOSUM.score >= i)))
-        y <- as.numeric(nrow(subset(data.SARS_EBOV, BLOSUM.score >= i)))
-        title <- paste('BLOSUM score', i)
-        p_value.HKU1 <- x / total_HKU1
-        p_value.EBOV <- y / total_EBOV
-        tbl.HKU1.pvalue[1, title] <- p_value.HKU1
-        tbl.HKU1.pvalue[2, title] <- p_value.EBOV
-}
-
-row.names(tbl.HKU1.pvalue) <- c('HCov-HKU1', 'Zaire-EBOV')
-
-prop.test(x = c(53959, 28), n = c(638612, 638612), correct = FALSE, conf.level = 0.95)
-
-
+# Summary statictics - not used in the report
 summary(data.SARS_HKU1$BLOSUM.score)
 summary(data.SARS_229E$BLOSUM.score)
 summary(data.SARS_NL63$BLOSUM.score)
