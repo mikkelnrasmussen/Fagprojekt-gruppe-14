@@ -24,4 +24,5 @@ p_hat_229E_low <- 21/5436
 (p_hat_229E_low + c(-1, 1) * qnorm(0.975) * sqrt((p_hat_229E_low * (1 - p_hat_229E_low))/5436))*100
 
 # Proportion test of the lowest proportional overlap in the overlap analysis with anchors (HCov-229E HLA-A29:02)
+# with the porpotion for the same allele observed in the control viruses (giving the largest p-value)
 prop.test(x = c(21, 0), n = c(5436, 2216), correct = FALSE)
