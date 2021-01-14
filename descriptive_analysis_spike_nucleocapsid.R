@@ -64,7 +64,7 @@ boxplot(data.SARS_nucleocapsid_HKU1$BLOSUM.score, data.SARS_nucleocapsid_229E$BL
 xat <- seq(0, 1, by = 0.2)
 xlabels <- seq(1, 0, by=-0.2)
 
-# Reversed cumulative distribution - spike protein
+# Reversed cumulative distribution - spike protein - one graph for each comparison with controls
 
 par(mfrow = c(1,1))
 Ecdf(1-data.SARS_spike_HKU1$BLOSUM.score, what = 'F', col="coral3", main = 'Reverse cumulative distibution of \n SARS-Cov-2 spike/HCov-HKU1 \n comparison', xaxt = "n")
@@ -92,7 +92,7 @@ axis(1, at=xat, labels=xlabels)
 legend("topleft", legend=c("HCov-OC43", "Zaire-EBOV", "Influenza-A-H3N2"), col=c("darkorchid3","black", "grey"), lty = 1, cex = 0.75, text.width = 0.1)
 
 
-# Reversed cumulative distribution - nucleocapsid protein
+# Reversed cumulative distribution - nucleocapsid protein - one graph for each comparison with controls
 
 par(mfrow = c(1,1))
 Ecdf(1-data.SARS_nucleocapsid_HKU1$BLOSUM.score, what = 'F', col="coral3", main = 'Reverse cumulative distibution of \n SARS-Cov-2 nucleocapsid/HCov-HKU1 \n comparison', xaxt = "n")
@@ -120,7 +120,7 @@ axis(1, at=xat, labels=xlabels)
 legend("topleft", legend=c("HCov-OC43", "Zaire-EBOV", "Influenza-A-H3N2"), col=c("darkorchid3","black", "grey"), lty = 1, cex = 0.75, text.width = 0.1)
 
 
-# Comparison of spike and nucleocapsid
+# Combined graph of reverse cumulative distribution curve of the comparison of spike and nucleocapsid
 # HKU1
 par(mfrow = c(1,1))
 Ecdf(1-data.SARS_spike_HKU1$BLOSUM.score, what = 'F', col="coral3", main = 'Reverse cumulative distibution of \n SARS-Cov-2 spike/nucleocapsid \n HCov-HKU1 comparison', xaxt = "n")
